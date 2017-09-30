@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pm="http://primefaces.org/mobile"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+     
+    <f:view renderKitId="PRIMEFACES_MOBILE" />
+        <h:outputScript id="audioInclude" rendered="#{param['anno'] != null}" target="body">  
+            /* <![CDATA[ */
+               $(document).ready(function() {
+                  resizeMap(false);
+                  window.addEventListener("load", function() { window.scrollTo(0, 1); });
+                });
+                
+                
+                window.onresize = function() {
+                    resizeMap(false);
+                };
+            /* ]]> */  
+        </h:outputScript>
+        <h:outputScript id="audioInclude2" rendered="#{param['anno'] == null}" target="body">  
+            /* <![CDATA[ */
+               $(document).ready(function() {
+                  resizeMap(true);
+                  window.addEventListener("load", function() { window.scrollTo(0, 1); });
+                });
+                
+                
+                window.onresize = function() {
+                    resizeMap(true);
+                };
+            /* ]]> */  
+        </h:outputScript>
+    <h:head>
+        <title>#{correnteManagedBean.titolo()}</title>
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyAjQqCT3m1ZeIBBDSN1q_AQYO51bfCVqqE" type="text/javascript"></script> 
+        <script type="text/javascript">
+           
+            //<![CDATA[
+            var isMobile = { 
+            Android: function() { return navigator.userAgent.match(/Android/i); }, 
+            BlackBerry: function() { return navigator.userAgent.match(/BlackBerry/i); }, 
+            iOSiPhone: function() { return navigator.userAgent.match(/iPhone|iPod/i); }, 
+            iOSiPad: function() { return navigator.userAgent.match(/iPad/i); }, 
+            Opera: function() { return navigator.userAgent.match(/Opera Mini/i); }, 
+            Windows: function() { return navigator.userAgent.match(/IEMobile/i); }, 
+            any: function() { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOSiPad() || isMobile.iOSiPhone()|| isMobile.Opera() || isMobile.Windows()); } }; 
+            
+             $(document).ready(function() {
+                 document.title = '#{correnteManagedBean.titolo()}';
+                });
+             function redirectMobile()
+             {
+                 if(isMobile.iOSiPhone()) 
+                     Redirect('https://itunes.apple.com/it/app/correnti-dello-stretto-di/id954170314?mt=8&uo=4');
+                 else if(isMobile.iOSiPad()) 
+                     window.location.replace('https://itunes.apple.com/it/app/correnti-dello-stretto-di/id954170314?mt=8&uo=4');
+                 else if (isMobile.Android() || isMobile.BlackBerry())
+                     window.location.replace('https://play.google.com/store/apps/details?id=erainformatica.correntidellostretto&hl=it');
+                 else if (isMobile.Windows())
+                     window.location.replace('http://www.windowsphone.com/it-it/store/app/correnti-dello-stretto/262732af-add0-4833-94f6-dcaaf11048fb');
+                 else
+                     PF('mobileDlg').show();
+             }
+             
+        function Redirect (url) {
+                        // Internet Explorer 8 and lower fix
+                if (navigator.userAgent.match(/MSIE\s(?!9.0)/))
+                {
+                    var referLink = document.createElement("a");
+                    referLink.href = url;
+                    document.body.appendChild(referLink);
+                    referLink.click();
+                }
+                else {
+                    // All other browsers
+                    window.location.replace(url);
+                }
+            }
+        
+                
+                function resizeMap(unicaVisible)
+                {
+                    
+                    if (window.innerWidth>600)
+                    {
+                        if (unicaVisible == true)
+                        {
+                            document.getElementById('unica:fooMain:fooTXT').setAttribute('style', 'text-align: center; font-size: 18px;');
+                            document.getElementById('unica:fooMain:stancaSucc').style.fontSize ='18px';
+                            document.getElementById('unica:fooMain:piccoSucc').style.fontSize ='18px';
+                            document.getElementById('unica:fooMain:btn-tavola').style.fontSize ='20px';
+                            document.getElementById('unica:fooMain:btn-basic').style.fontSize ='20px';
+                            document.getElementById('unica:fooMain:btn-luna').style.fontSize ='20px';
+                            var c = document.getElementById('unica:gmap');
+                            var d = window.innerHeight -166;
+                            c.style.height = d + "px";
+
+                            var c1 = document.getElementById('unica:lunaDiv');
+                            var d2 = window.innerHeight -100;
+                            c1.style.height = d2 + "px";
+                            
+                            var c2 = document.getElementById('unica:infoDiv');
+                            var d3 = window.innerHeight -100;
+                            c2.style.height = d3 + "px";
+                        }
+                        var t1 = document.getElementById('tavola:tavoleForm:headerTavole');
+                        if (t1 != null)
+                            t1.style.fontSize ='18px';
+                        var t2 = document.getElementById('tavola:tavoleForm:tabellaTavole');
+                        if (t2 != null)
+                        {
+                            t2.style.fontSize ='16px';
+                        }
+                        var t3 = document.getElementById('tavola:tavoleForm:tavoleTitolo');
+                        if (t3 != null)
+                        {
+                            t3.style.fontSize ='30px';
+                        }
+                    }
+                    else if (window.innerWidth>350)
+                    {
+                        if (unicaVisible == true)
+                        {
+                            document.getElementById('unica:fooMain:fooTXT').setAttribute('style', 'text-align: center; font-size: 12px;');
+                            document.getElementById('unica:fooMain:stancaSucc').style.fontSize='12px';
+                            document.getElementById('unica:fooMain:piccoSucc').style.fontSize ='12px';
+                            document.getElementById('unica:fooMain:btn-tavola').style.fontSize ='14px';
+                            document.getElementById('unica:fooMain:btn-basic').style.fontSize ='14px';
+                            document.getElementById('unica:fooMain:btn-luna').style.fontSize ='14px';
+                            var c = document.getElementById('unica:gmap');
+                            var d = window.innerHeight -127;
+                            c.style.height = d + "px";
+
+                            var c1 = document.getElementById('unica:lunaDiv');
+                            var d2 = window.innerHeight -100;
+                            c1.style.height = d2 + "px";
+                            
+                            var c2 = document.getElementById('unica:infoDiv');
+                            var d3 = window.innerHeight -100;
+                            c2.style.height = d3 + "px";
+                        }
+                        var t1 = document.getElementById('tavola:tavoleForm:headerTavole');
+                        if (t1 != null)
+                            t1.style.fontSize ='12px';
+                        var t2 = document.getElementById('tavola:tavoleForm:tabellaTavole');
+                        if (t2 != null)
+                        {
+                            t2.style.fontSize ='11px';
+                        }
+                        var t3 = document.getElementById('tavola:tavoleForm:tavoleTitolo');
+                        if (t3 != null)
+                        {
+                            t3.style.fontSize ='16px';
+                        }
+                    }
+                    else
+                    {
+                        if (unicaVisible == true)
+                        {
+                            document.getElementById('unica:fooMain:fooTXT').setAttribute('style', 'text-align: center; font-size: 12px;');
+                            document.getElementById('unica:fooMain:stancaSucc').style.fontSize='10px';
+                            document.getElementById('unica:fooMain:piccoSucc').style.fontSize ='10px';
+                            document.getElementById('unica:fooMain:btn-tavola').style.fontSize ='13px';
+                            document.getElementById('unica:fooMain:btn-basic').style.fontSize ='13px';
+                            document.getElementById('unica:fooMain:btn-luna').style.fontSize ='13px';
+                            var c = document.getElementById('unica:gmap');
+                            var d = window.innerHeight -122;
+                            c.style.height = d + "px";
+
+                            var c1 = document.getElementById('unica:lunaDiv');
+                            var d2 = window.innerHeight -100;
+                            c1.style.height = d2 + "px";
+                            
+                            var c2 = document.getElementById('unica:infoDiv');
+                            var d3 = window.innerHeight -100;
+                            c2.style.height = d3 + "px";
+                        }
+                        var t1 = document.getElementById('tavola:tavoleForm:headerTavole');
+                        if (t1 != null)
+                            t1.style.fontSize ='12px';
+                        var t2 = document.getElementById('tavola:tavoleForm:tabellaTavole');
+                        if (t2 != null)
+                        {
+                            t2.style.fontSize ='9px';
+                        }
+                        var t3 = document.getElementById('tavola:tavoleForm:tavoleTitolo');
+                        if (t3 != null)
+                        {
+                            t3.style.fontSize ='12px';
+                        }
+                    }
+                        
+                    
+                }
+                
+                function forceResize()
+                {
+                    var evt = document.createEvent('UIEvents');
+                    evt.initUIEvent('resize', true, false,window,0);
+                    window.dispatchEvent(evt);
+                }
+                
+                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                    ga('create', 'UA-3303696-30', 'auto');
+                    ga('send', 'pageview');
+   
+                //]]>
+
+                
+            </script>
+        
+        <style type="text/css">
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-y: hidden;
+            }
+            
+            .ui-content
+            {
+                padding:0px;
+            }
+            
+            .ui-btn {
+                font-size: 12px;
+            }
+            body {
+  position: relative;
+}
+        </style>
+        <c:if test="#{param['anno'] != null}">
+            <style type="text/css">
+             html, body {
+                    overflow-y: visible;
+                }
+            </style>
+        </c:if>
+    </h:head>
+     
+    <h:body>
+        <div id="title" style="visibility: hidden">Calcolo in tempo reale delle Correnti dello Stretto di Messina. Tavola delle correnti dello stretto di Messina. Tabella delle Correnti dello Stretto di Messina.</div>
+            <pm:page rendered="#{param['anno'] == null}" id="unica">
+                <pm:header style="font-size: 15px;" title="Correnti" fixed="true" swatch="b">
+                    <p:commandButton value="Info" icon="ui-icon-info" onclick="PF('infoDlg').show();" styleClass="ui-btn-left ui-btn-inline" type="button"/>
+                    <p:commandButton style="font-size:10px; margin-top: 5px;" value="Scarica l'app!" icon="ui-icon-grid" onclick="redirectMobile();" styleClass="ui-btn-right ui-btn-inline" type="button"/>
+                </pm:header>
+                <pm:content>
+                        <p:gmap id="gmap" widgetVar="gm" center="38.244707,15.6240874" disableDefaultUI="true" style="width: 100%; height: 400px;"  zoom="12" type="ROADMAP" model="#{correnteManagedBean.frecce}">
+                            <p:ajax event="overlaySelect" listener="#{correnteManagedBean.onMarkerSelect}" />
+                            <p:gmapInfoWindow id="infoWindow">
+                                <p:outputPanel style="text-align: center; display: block; margin: auto">
+                                    <h:panelGrid columns="2">
+                                        <h:outputText style="font-weight: bold;" value="Luogo: " />
+                                        <h:outputText value="#{correnteManagedBean.correnteSelezionata.luogo}" />
+                                        <h:outputText style="font-weight: bold;" value="Intensità: " />
+                                        <h:outputText value="#{correnteManagedBean.roundDouble(correnteManagedBean.correnteSelezionata.intensity)}" />
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:gmapInfoWindow>
+                        </p:gmap>
+                    <p:dialog header="Luna" widgetVar="luna" showEffect="pop">
+                            <h:panelGroup layout="block" id="lunaDiv" style="text-align:center; overflow:scroll;">
+                                <p:panelGrid columns="1" style="padding:5px; text-align:center;" id="fasiLunari">
+                                    <h:graphicImage url="resources/images/moon/#{correnteManagedBean.valLuna.toString()}.jpg" width="250px"></h:graphicImage>
+                                    <h:outputText style="text-align:center; color: chocolate; font-weight: bolder; font-size: 14px;" value="#{correnteManagedBean.faseLunare}"></h:outputText>
+                                    <h:outputText style="text-align:center; font-weight: bold;" value="Luce: #{correnteManagedBean.luceLuna.toString()}%"></h:outputText>
+                                    <h:outputText style="text-align:center; font-weight: bold; font-size: 14px; margin-top: 20px;" value="Prossime fasi lunari"></h:outputText>
+                                    <p:panelGrid columns="3">
+                                        <c:forEach var="luna" items="#{correnteManagedBean.storicoLuna}">
+                                            <h:graphicImage url="resources/images/moon/#{luna.get(0)}.jpg" width="50px"></h:graphicImage>
+                                            <h:outputText style="text-align:center; color: chocolate; font-weight: bolder; font-size: 12px;" value="#{luna.get(1)}"></h:outputText>
+                                            <h:outputText value="#{correnteManagedBean.dateToString('dd/MM/YYYY', luna.get(3))}" ></h:outputText>
+                                        </c:forEach>
+                                    </p:panelGrid>
+                                </p:panelGrid>
+                            </h:panelGroup>
+                        </p:dialog>
+                    <p:dialog header="Imposta data" widgetVar="impostaOrario" showEffect="pop">
+                            <h:form id="main">
+                                <p:panelGrid columns="1" style="padding:5px;" id="selezionaData">
+                                    <h:panelGroup layout="block">
+                                        <fieldset>
+                                            <legend><b>Data</b></legend>
+                                            <p:panelGrid columns="3" style="width: 260px;">
+                                                    <p:selectOneMenu id="giornoMobile" value="#{correnteManagedBean.giornoMobile}">
+                                                        <f:selectItem itemLabel="Giorno" itemValue="" />
+                                                        <f:selectItems value="#{correnteManagedBean.giorniMobile}" />
+                                                    </p:selectOneMenu>
+                                                    <p:selectOneMenu id="meseMobile" value="#{correnteManagedBean.meseMobile}">
+                                                        <p:ajax update=":unica:main:selezionaData" process=":unica:main:selezionaData"></p:ajax>
+                                                        <f:selectItem itemLabel="Mese" itemValue="" />
+                                                        <f:selectItems value="#{correnteManagedBean.mesiMobile}" />
+                                                    </p:selectOneMenu>
+                                                    <p:selectOneMenu id="annoMobile" value="#{correnteManagedBean.annoMobile}">
+                                                        <f:selectItem itemLabel="Anno" itemValue="" />
+                                                        <f:selectItems value="#{correnteManagedBean.anniMobile}" />
+                                                    </p:selectOneMenu>
+                                            </p:panelGrid>
+                                        </fieldset>
+                                    </h:panelGroup>
+                                <h:panelGroup layout="block">
+                                    <fieldset>
+                                        <legend><b>Ora</b></legend>
+                                        <p:panelGrid columns="2">
+                                            <p:selectOneMenu id="oreMobile" value="#{correnteManagedBean.oreMobile}">
+                                                <f:selectItem itemLabel="Ore" itemValue="" />
+                                                <c:forEach var="i" begin="0" end="23">
+                                                    <f:selectItem itemLabel="#{i}" itemValue="#{i}" />
+                                                </c:forEach>
+                                            </p:selectOneMenu>
+                                            <p:selectOneMenu id="minutiMobile" value="#{correnteManagedBean.minutiMobile}">
+                                                <f:selectItem itemLabel="Minuti" itemValue="" />
+                                                <c:forEach var="i" begin="0" end="59">
+                                                    <f:selectItem itemLabel="#{i}" itemValue="#{i}" />
+                                                </c:forEach>
+                                            </p:selectOneMenu>
+                                        </p:panelGrid>
+                                    </fieldset>
+                                </h:panelGroup>
+                                <p:commandButton icon="ui-icon-gear" id="invia-mobile" value="Calcola corrente" actionListener="#{correnteManagedBean.ricalcola()}" oncomplete="PF('impostaOrario').hide();"  />
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                    <p:dialog header="Informazioni" widgetVar="infoDlg" id="infoDlg" showEffect="pop">
+                            <h:panelGroup layout="block" id="infoDiv" style="text-align:center; overflow:scroll; padding:10px;">
+                                <p:panelGrid columns="1">
+                                    <h:form id="puntoSelezionato">
+                                        <p:panelGrid columns="2">
+                                            <h:outputText style="vertical-align: middle; margin-top: auto; margin-bottom: auto;" value="Punto di calcolo (stanca e picco e tabella correnti:)" />
+                                            <p:selectOneMenu id="puntoSel" value="#{correnteManagedBean.puntoSelezionato}">
+                                                <f:selectItems value="#{correnteManagedBean.nomiCorrenti}" var="punto" itemLabel="#{punto.luogoShort}" itemValue="#{punto.id}" />
+                                                <p:ajax listener="#{correnteManagedBean.ricalcola()}" /> 
+                                            </p:selectOneMenu>
+                                        </p:panelGrid>
+                                    </h:form>
+                                    <h:outputText value="#{applicationManagedBean.credits}" escape="false" ></h:outputText>
+                                </p:panelGrid>
+                            </h:panelGroup>
+                    </p:dialog>
+                    <p:dialog header="Scarica l'app" widgetVar="mobileDlg" id="mobileDlg" showEffect="pop">
+                        <p:panelGrid columns="1" style="text-align:center;">
+                            <h:outputText value="Disponibile per:" style="margin-top:20px;"></h:outputText>
+                            <p:panelGrid columns="1">
+                                <p:panelGrid layout="block">
+                                    <a href="https://play.google.com/store/apps/details?id=erainformatica.correntidellostretto">
+                                        <h:graphicImage style="padding: 20px;" url="resources/images/google.jpg" width="100px"></h:graphicImage>
+                                    </a>
+                                </p:panelGrid>
+                            </p:panelGrid>
+                        </p:panelGrid>
+                    </p:dialog>
+                </pm:content>
+                <pm:footer id="foo" fixed="true">
+                    <h:form id="fooMain">
+                        <p:panelGrid id="fooTXT" columns="2" style="text-align: center; font-size: 12px; width: 100%;">
+                            <h:outputText style="font-weight: bolder; color: darkorange;" value="Data/ora: #{correnteManagedBean.giornoOraString()}"/>
+                            <h:outputText style="font-variant: small-caps; color:#{correnteManagedBean.datiCorrenti().get(0).getIntensity()>0 ? correnteManagedBean.coloreCorrenteMontante() : correnteManagedBean.coloreCorrenteAscendente()}" value="#{correnteManagedBean.tipoCorrente().concat(correnteManagedBean.andamento == true ? ' in aumento' : ' in diminuzione')} " />
+                            <h:outputText id="stancaSucc" style="color: mediumslateblue" value="Stanca succ: #{correnteManagedBean.giornoOraString(correnteManagedBean.stanca)}"/>
+                            <h:outputText id="piccoSucc" style="color:#{correnteManagedBean.datiCorrenti().get(0).getIntensity()>0 ? correnteManagedBean.coloreCorrenteAscendente() : correnteManagedBean.coloreCorrenteMontante()}" value="Picco succ: #{correnteManagedBean.giornoOraString(correnteManagedBean.picco)}"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="3" style="text-align:center;">
+                            <p:commandButton icon="ui-icon-gear" id="btn-basic" style="color:red;" onclick="PF('impostaOrario').show();" value="Data/ora" type="button"/>
+                            <p:button icon="ui-icon-info" id="btn-tavola" style="color:green; font-weight: bold;" onclick="document.body.style.overflowY='auto';" outcome="pm:tavola" value="Tabelle"/>
+                            <p:commandButton icon="ui-icon-bullet" id="btn-luna" style="color:red; font-weight: bold;" onclick="PF('luna').show();" value="Luna" type="button"/>
+                        </p:panelGrid>
+                    </h:form>
+                </pm:footer>
+        </pm:page>
+        <pm:page id="tavola" lazy="#{param['anno'] == null ? 'true' : 'false'}" >
+            <pm:header>
+                <p:button rendered="#{param['anno'] == null}" href="/tavola/#{correnteManagedBean.dateToString('YYYY', correnteManagedBean.orario)}" value="#{correnteManagedBean.dateToString('YYYY', correnteManagedBean.orario)}" icon="ui-icon-arrow-r" styleClass="ui-btn-right ui-btn-inline"/>
+                <p:button rendered="#{param['anno'] == null}" onclick="document.body.style.overflowY='hidden';" outcome="pm:unica" value="Mappa" icon="ui-icon-arrow-l" styleClass="ui-btn-left ui-btn-inline"/>
+                <p:button href="/tavola/#{param['anno']}" rendered="#{param['anno'] != null and param['mese'] != null}" value="#{param['anno']}" icon="ui-icon-arrow-l" styleClass="ui-btn-left ui-btn-inline"/>
+                <p:button href="/" rendered="#{param['anno'] != null and param['mese'] == null}" value="Mappa" icon="ui-icon-arrow-l" styleClass="ui-btn-left ui-btn-inline"/>
+            </pm:header>
+            <pm:content>
+                <p:dialog header="Cambio Punto" widgetVar="cambioPuntoDlg" id="cambioPuntoDlg" showEffect="pop">
+                    <h:panelGroup layout="block" id="cambioPuntoDlgDiv" style="text-align:center; overflow:scroll; padding:10px;">
+                        <p:panelGrid columns="1">
+                            <h:form id="puntoSelezionato">
+                                <p:panelGrid columns="2">
+                                    <h:outputText value="Punto di calcolo (stanca e picco e tabella correnti:)" />
+                                    <p:selectOneMenu id="puntoSel" value="#{correnteManagedBean.puntoSelezionato}">
+                                        <f:selectItems value="#{correnteManagedBean.nomiCorrenti}" var="punto" itemLabel="#{punto.luogoShort}" itemValue="#{punto.id}" />
+                                        <p:ajax listener="#{correnteManagedBean.ricalcola()}" /> 
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </p:dialog>
+                <h:form id="tavoleForm">
+                    <h:panelGroup layout="block" style="margin-left:auto; margin-right: auto; text-align: center;">
+                        <p:panelGrid columns="1" id="tavole" style="margin-top:5px;" rendered="#{!correnteManagedBean.mostraMesiAnni}">
+                            <h:outputText value="Tabella correnti"></h:outputText>
+                            <h:outputText id="tavoleTitolo" value=" #{correnteManagedBean.ottieniNomeMeseCorrente(true)} #{correnteManagedBean.dateToString('YYYY', correnteManagedBean.orario)}" />
+                            <h:panelGrid columns="4" id="headerTavole" style="margin-left:auto; margin-right: auto;">
+                                <h:outputText value="Leggenda:"></h:outputText>
+                                <h:outputText value="STANCA" style="font-weight: bold; color: red;" />
+                                <h:outputText value="Montante" style="font-weight: bold; color: #{correnteManagedBean.coloreCorrenteMontante()}" />
+                                <h:outputText value="Scendente" style="font-weight: bold; color: #{correnteManagedBean.coloreCorrenteAscendente()}" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" id="nomePuntoCalcolo" style="margin-left:auto; margin-right: auto;">
+                                <h:outputText style="color: olivedrab; font-weight: bold;" value="Punto di calcolo: #{correnteManagedBean.ottieniNomePuntoSelezionata()} "></h:outputText>
+                                <p:commandButton value="Cambia" icon="ui-icon-info" onclick="PF('cambioPuntoDlg').show();" type="button"/>
+                            </h:panelGrid>
+                            <h:outputText style="font-size:10px; font-weight: lighter; margin-left:auto; margin-right: auto;" value="N.B. per alcuni punti con corrente trascurabile, i risultati potrebbero essere non significativi. " />
+                            <p:dataTable var="cor" value="#{correnteManagedBean.ottieniTavolaCorrenti()}" stickyHeader="true" id="tabellaTavole">
+                                 <p:column headerText="GG">
+                                     <h:outputText style="font-weight: bold;" value="#{correnteManagedBean.dateToString('dd', cor.get(count).getOrario())}" />
+                                 </p:column>
+                                <c:forEach var="count" begin="0" end="7">
+                                    <p:column headerText="#{correnteManagedBean.ePari(count) ? 'Stanca' : 'Picco'}" style="text-align: center; color: darkcyan; font-variant: small-caps;">
+                                        <p:panelGrid columns="1">
+                                            <h:outputText escape="false" style="font-weight:bold; text-align: center; #{cor.get(count) != null and count>4 and !(correnteManagedBean.getOre(cor.get(count).getOrario()) >6) ? 'font-style: italic;' : ''} #{cor.get(count) == (null) ? 'color: black;' : cor.get(count).isIsPicco() ? cor.get(count).getIntensita()>0 ? 'color: '.concat(correnteManagedBean.coloreCorrenteMontante()).concat(';') : 'color: '.concat(correnteManagedBean.coloreCorrenteAscendente()).concat(';') : 'color: red;'}" value="#{cor.get(count) == (null) ? '---' : correnteManagedBean.dateToString('HH:mm', cor.get(count).getOrario())}" />
+                                            <h:outputText rendered="#{cor.get(count).isIsPicco()}" value="#{correnteManagedBean.intensitaRoundABS(cor.get(count).getIntensita())} nodi" style="font-weight: bold; text-align: center; #{cor.get(count).getIntensita()>0 ? 'color: '.concat(correnteManagedBean.coloreCorrenteMontante()).concat(';') : 'color: '.concat(correnteManagedBean.coloreCorrenteAscendente()).concat(';')}" ></h:outputText>
+                                        </p:panelGrid>
+                                    </p:column>
+                                </c:forEach>
+                            </p:dataTable>
+                        </p:panelGrid>
+                        <p:panelGrid columns="1" id="tavole2" style="margin-top:5px; margin-top: 50px;" rendered="#{correnteManagedBean.mostraMesiAnni}">
+                            <h:outputText value="Tabella correnti #{correnteManagedBean.dateToString('YYYY', correnteManagedBean.orario)}"></h:outputText>
+                            <p:panelGrid columns="1" style="margin-top: 20px;">
+                                <c:forEach var="i" begin="0" end="12">
+                                    <p:link value="#{correnteManagedBean.ottieniNomeMeseCorrenteFromIndex(i)}" href="#{correnteManagedBean.ottieniLinkVerbose(i)}" style="font-size: 30px;"  />
+                                </c:forEach>
+                            </p:panelGrid>
+                        </p:panelGrid>
+                    </h:panelGroup>
+                </h:form>
+            </pm:content>
+        </pm:page>
+    </h:body>
+</html>

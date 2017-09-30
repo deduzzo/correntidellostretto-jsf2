@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Correnti dello Stretto - Beta</title>
+            <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
+            <script type="text/javascript">
+                
+                PrimeFaces.locales ['it'] = {
+                    closeText: 'Chiudi',
+                    prevText: 'Precedente',
+                    nextText: 'Prossimo',
+                    monthNames: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre' ],
+                    monthNamesShort: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic' ],
+                    dayNames: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+                    dayNamesMin: ['D', 'L', 'M', 'M ', 'G', 'V ', 'S'],
+                    weekHeader: 'Sett',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix:'',
+                    timeOnlyTitle: 'Solo Tempo',
+                    timeText: 'Ora',
+                    hourText: 'Ore',
+                    minuteText: 'Min.',
+                    secondText: 'Sec.',
+                    currentText: 'Data Odierna',
+                    ampm: false,
+                    month: 'Mese',
+                    week: 'Settimana',
+                    day: 'Giorno',
+                    allDayText: 'Tutto il Giorno'
+                };
+            </script>
+            <style type="text/css">
+                
+            </style>
+        </h:head>
+
+        <h:body>
+           <p:layout fullPage="true">
+               <p:layoutUnit position="north" size="30" style="border:none;">
+                   <ui:insert name="top"><center><b>Correnti dello Stretto di Messina - BETA</b></center></ui:insert>
+                </p:layoutUnit>
+               <p:layoutUnit position="center">
+                    <ui:insert name="content"></ui:insert>
+                </p:layoutUnit>
+           </p:layout>
+                <ui:insert name="out"></ui:insert>
+        </h:body>
+    </f:view>
+
+</html>
