@@ -42,19 +42,8 @@ public class ApplicationManagedBean {
 "                                non si assumono alcuna responsabilità sull'utilizzo improprio dello stesso e dei valori ottenuti.</b><br />\n" +
 "                                <br />\n" +
 "                                \"Correnti dello Stretto\" è disponibile <b>gratuitamente</b> <br />\n" +
-"                                per iPhone, iPad, Android e Windows Phone o all'indirizzo <a href='http://www.correntidellostretto.it'>www.correntidellostretto.it</a>\n<br />" +
-                                 "<br /><br />Per info e suggerimenti <a hfef='mailto:dev@erainformatica.it'>dev@erainformatica.it</a>" + 
-                                 "<br /><br />Se vi è stato utile il sito, sarebbe fantastico ricevere da voi una donazione tramite Paypal. Grazie.<br /><br /><form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">\n" +
-                                "<input type=\"hidden\" name=\"cmd\" value=\"_donations\">\n" +
-                                "<input type=\"hidden\" name=\"business\" value=\"deduzzo@gmail.com\">\n" +
-                                "<input type=\"hidden\" name=\"lc\" value=\"IT\">\n" +
-                                "<input type=\"hidden\" name=\"item_name\" value=\"Era Informatica\">\n" +
-                                "<input type=\"hidden\" name=\"item_number\" value=\"correntidellostretto\">\n" +
-                                "<input type=\"hidden\" name=\"no_note\" value=\"0\">\n" +
-                                "<input type=\"hidden\" name=\"currency_code\" value=\"EUR\">\n" +
-                                "<input type=\"hidden\" name=\"bn\" value=\"PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest\">\n" +
-                                "<input type=\"image\" src=\"https://www.paypalobjects.com/it_IT/IT/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - Il metodo rapido, affidabile e innovativo per pagare e farsi pagare.\">\n" +
-                                "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/it_IT/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n" +
+"                                per iPhone, iPad, Android e Windows Phone all'indirizzo <a href='http://www.correntidellostretto.it'>www.correntidellostretto.it</a>\n<br />" +
+                                 "<br /><br />Per info e suggerimenti <a hfef='mailto:dev@erainformatica.it'>dev@erainformatica.it</a>" +
                                 "</form>";
 
     public String getUltimaDataAggiornamentoDati() {
