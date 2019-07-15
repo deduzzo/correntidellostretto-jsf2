@@ -715,7 +715,7 @@ public class CorrenteManagedBean implements Serializable {
         return ConfigClass.correnteForte;
     }
     
-    public String oraLegale()
+    public String oraLegales()
     {
         if (TimeZone.getDefault().inDaylightTime(orario))
             return "Ora Legale";
